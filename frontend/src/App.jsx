@@ -2,19 +2,10 @@ import { Route, Routes } from 'react-router';
 import HomePage from '../pages/HomePage';
 import CreatePage from '../pages/CreatePage';
 import NoteEditorPage from '../pages/NoteEditorPage';
-import toast from 'react-hot-toast';
 
 const App = () => {
   return (
     <div>
-      <button
-        onClick={() => {
-          toast.success('congrats');
-        }}
-        className="text-red-500 p-4 bg"
-      >
-        Click me
-      </button>
       <Routes>
         <Route
           path="/"
