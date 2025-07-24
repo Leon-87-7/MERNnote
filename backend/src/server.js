@@ -9,7 +9,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-connectDB();
 //middleware
 app.use(express.json()); //this middleware wilt parse JSON bodies: req.body
 
@@ -22,6 +21,8 @@ app.use((req, res, next) => {
 
 app.use('/api/notes', noteRoutes);
 
-app.listen(PORT, () => {
-  console.log('server started om PORT:', PORT);
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log('server started om PORT:', PORT);
+  });
 });
