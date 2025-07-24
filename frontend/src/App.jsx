@@ -5,7 +5,7 @@ import NoteEditorPage from '../pages/NoteEditorPage';
 
 const App = () => {
   return (
-    <div>
+    <div data-theme="sunset">
       <Routes>
         <Route
           path="/"
