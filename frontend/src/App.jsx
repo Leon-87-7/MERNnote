@@ -5,7 +5,7 @@ import NoteEditorPage from '../pages/NoteEditorPage';
 
 const App = () => {
   return (
-    <div data-theme="forest">
+    <div data-theme="sunset">
       <button className="btn btn-primary">click-me</button>
       <button className="btn">Button</button>
       <button className="btn btn-neutral">Neutral</button>
