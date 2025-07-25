@@ -58,6 +58,7 @@ const HomePage = () => {
               <NoteCard
                 key={note._id}
                 note={note}
+                setNotes={setNotes}
               />
             ))}
           </div>
