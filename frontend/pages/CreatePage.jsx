@@ -31,7 +31,14 @@ const CreatePage = () => {
       Navigate('/');
     } catch (error) {
       console.log('Error creating note', error);
-      toast.error('Failed to create note');
+      if (error.response.status === 429) {
+        toast.error("You're creating too many notes, slow down!", {
+          duration: 3000,
+          icon: '🦥',
+        });
+      } else {
+        toast.error('Failed to create note');
+      }
     } finally {
       setLoading(false);
     }
