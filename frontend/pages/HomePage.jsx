@@ -6,6 +6,7 @@ import NavBar from '../src/components/NavBar';
 import RateLimitedUI from '../src/components/RateLimitedUI';
 import NoteCard from '../src/components/NoteCard';
 import api from '../src/lib/axios';
+import NotesNotFound from '../src/components/NotesNotFound';
 
 const HomePage = () => {
   const [isRateLimited, setIsRateLimited] = useState(false);
@@ -51,6 +52,8 @@ const HomePage = () => {
             />
           </div>
         )}
+
+        {notes.length === 0 && !isRateLimited && <NotesNotFound />}
 
         {notes.length > 0 && !isRateLimited && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
