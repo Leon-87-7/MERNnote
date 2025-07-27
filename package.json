@@ -1,0 +1,21 @@
+{
+  "name": "mernnote",
+  "version": "1.0.0",
+  "description": "MERNnote is a comprehensive full-stack notes application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). This project represents a significant milestone in my journey from frontend-focused React development to full-stack web development, showcasing my evolution as a developer and the integration of multiple cutting-edge technologies.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leon-87-7/MERNnote.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leon-87-7/MERNnote/issues"
+  },
+  "homepage": "https://github.com/Leon-87-7/MERNnote#readme"
+}
