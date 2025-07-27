@@ -1,5 +1,6 @@
 # MERNnote - Full-Stack Notes Application
-[check the app now!](https://mernnote-yn2t.onrender.com/)
+<a href="[https://example.com](https://mernnote-yn2t.onrender.com/)" target="_blank">check the app now!</a>
+
 ## 🎯 Project Overview
 
 MERNnote is a comprehensive full-stack notes application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). This project represents a significant milestone in my journey from frontend-focused React development to full-stack web development, showcasing my evolution as a developer and the integration of multiple cutting-edge technologies.
