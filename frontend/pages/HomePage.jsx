@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { HashLoader } from 'react-spinners';
+import { PuffLoader } from 'react-spinners';
 
 import NavBar from '../src/components/NavBar';
 import RateLimitedUI from '../src/components/RateLimitedUI';
@@ -46,9 +46,9 @@ const HomePage = () => {
             Loading notes...
             <br />
             <br />
-            <HashLoader
+            <PuffLoader
               color="#18a048"
-              size={50}
+              size={60}
             />
           </div>
         )}
