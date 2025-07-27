@@ -1,5 +1,6 @@
 # MERNnote - Full-Stack Notes Application
-<a href="[https://example.com](https://mernnote-yn2t.onrender.com/)" target="_blank">check the app now!</a>
+[check the app now!](https://mernnote-yn2t.onrender.com/)
+
 
 ## 🎯 Project Overview
 
