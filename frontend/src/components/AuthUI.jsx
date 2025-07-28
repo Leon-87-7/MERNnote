@@ -1,4 +1,4 @@
-import { emailPasswordSignInAndUp } from 'supertokens-auth-react/recipe/emailpassword';
+import { signIn, signUp } from 'supertokens-auth-react/recipe/emailpassword';
 import { redirectToThirdPartyLogin } from 'supertokens-auth-react/recipe/thirdparty';
 import { useState } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -12,15 +12,19 @@ const AuthPage = () => {
   const handleEmailPasswordAuth = async (e) => {
     e.preventDefault();
     try {
-      const response = await emailPasswordSignInAndUp({
-        formFields: [
-          { id: 'email', value: email },
-          { id: 'password', value: password },
-        ],
-      });
+      const formFields = [
+        { id: 'email', value: email },
+        { id: 'password', value: password },
+      ];
+
+      const response = isSignUp 
+        ? await signUp({ formFields })
+        : await signIn({ formFields });
 
       if (response.status === 'OK') {
         window.location.assign('/');
+      } else {
+        console.error('Auth failed:', response);
       }
     } catch (error) {
       console.error('Auth error:', error);
@@ -75,6 +79,16 @@ const AuthPage = () => {
               {isSignUp ? 'Sign Up' : 'Sign In'}
             </button>
           </form>
+
+          <div className="text-center mt-4">
+            <button
+              type="button"
+              onClick={() => setIsSignUp(!isSignUp)}
+              className="btn btn-ghost btn-sm"
+            >
+              {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
+            </button>
+          </div>
 
           <div className="divider">OR</div>
 
