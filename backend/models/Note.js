@@ -13,6 +13,11 @@ const noteSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    userId: {
+      type: String,
+      required: true,
+      index: true, // Add index for better query performance
+    },
   },
   { timestamps: true } // mongoDB giving us createdAt, updatedAt
 );

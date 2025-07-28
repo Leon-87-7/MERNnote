@@ -1,7 +1,9 @@
 import Note from '../../models/Note.js';
 
-export async function getAllNotes(_, res) {
+export async function getAllNotes(req, res) {
   try {
+    const userId = req.session.getUserId();
+
     const notes = await Note.find().sort({ createdAt: -1 }); //newest first
     res.status(200).json(notes);
   } catch (error) {
@@ -13,6 +15,8 @@ export async function getAllNotes(_, res) {
 // ******************************************************************
 export async function getNoteById(req, res) {
   try {
+    const userId = req.session.getUserId();
+
     const note = await Note.findById(req.params.id);
     if (!note)
       return res.status(404).json({ message: 'Note not found!' });
@@ -27,6 +31,8 @@ export async function getNoteById(req, res) {
 
 export async function createNote(req, res) {
   try {
+    const userId = req.session.getUserId();
+
     const { title, content } = req.body;
     const note = new Note({ title, content });
 
@@ -40,6 +46,8 @@ export async function createNote(req, res) {
 
 export async function updateNote(req, res) {
   try {
+    const userId = req.session.getUserId();
+
     const { title, content } = req.body;
     const updatedNote = await Note.findByIdAndUpdate(
       req.params.id,
@@ -59,6 +67,8 @@ export async function updateNote(req, res) {
 
 export async function deleteNote(req, res) {
   try {
+    const userId = req.session.getUserId();
+
     const deletedNote = await Note.findByIdAndDelete(req.params.id);
     if (!deletedNote)
       return res.status(404).json({ message: 'Note not found!' });

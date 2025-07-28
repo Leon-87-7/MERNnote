@@ -7,7 +7,11 @@ import {
   getNoteById,
 } from '../controllers/notesController.js';
 
+import { requireAuth } from '../../middleware/auth.js';
+
 const router = express.Router();
+
+router.use(requireAuth);
 
 router.get('/', getAllNotes);
 router.get('/:id', getNoteById);
