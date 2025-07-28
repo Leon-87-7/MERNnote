@@ -2,12 +2,20 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
+import SuperTokens from 'supertokens-node';
+import {
+  middleware,
+  errorHandler,
+} from 'supertokens-node/framework/express';
 
 import noteRoutes from './routes/notesRoutes.js';
 import { connectDB } from '../config/db.js';
 import rateLimiter from '../middleware/rateLimiter.js';
+import { initSuperTokens } from '../config/supertokens.js';
 
 dotenv.config();
+
+initSuperTokens();
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -15,8 +23,31 @@ const __dirname = path.resolve();
 
 //middleware
 if (process.env.NODE_ENV !== 'production') {
-  app.use(cors({ origin: 'http://localhost:5173' }));
+  app.use(
+    cors({
+      origin: 'http://localhost:5173',
+      allowedHeaders: [
+        'content-type',
+        ...SuperTokens.getAllCORSHeaders(),
+      ],
+      credentials: true,
+    })
+  );
+} else {
+  app.use(
+    cors({
+      origin: true,
+      allowedHeaders: [
+        'content-type',
+        ...SuperTokens.getAllCORSHeaders(),
+      ],
+      credentials: true,
+    })
+  );
 }
+
+app.use(middleware());
+
 app.use(express.json()); //this middleware will parse JSON bodies: req.body
 
 app.use(rateLimiter);
@@ -26,8 +57,10 @@ app.use((req, res, next) => {
   next();
 });
 
+//routes
 app.use('/api/notes', noteRoutes);
 
+//server frontend in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
@@ -37,6 +70,8 @@ if (process.env.NODE_ENV === 'production') {
     );
   });
 }
+
+app.use(errorHandler());
 
 connectDB().then(() => {
   app.listen(PORT, () => {
