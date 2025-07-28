@@ -4,9 +4,7 @@ import ThirdParty from 'supertokens-auth-react/recipe/thirdparty';
 import Session from 'supertokens-auth-react/recipe/session';
 
 export function initSuperTokens() {
-  console.log('API Domain:', import.meta.env.VITE_API_DOMAIN);
-  console.log('Website Domain:', import.meta.env.VITE_WEBSITE_DOMAIN);
-  console.log('Mode:', import.meta.env.MODE);
+  console.log('initSuperTokens function called!');
 
   SuperTokens.init({
     appInfo: {
@@ -58,4 +56,5 @@ export function initSuperTokens() {
       }),
     ],
   });
+  console.log('SuperTokens.init completed!');
 }

@@ -11,11 +11,17 @@ import {
 import noteRoutes from './routes/notesRoutes.js';
 import { connectDB } from '../config/db.js';
 import rateLimiter from '../middleware/rateLimiter.js';
-import initSuperTokens from '../config/supertokens.js';
+import initSuperTokens from './config/supertokens.js';
 
 dotenv.config();
 
-initSuperTokens();
+console.log('About to initialize SuperTokens...');
+try {
+  initSuperTokens();
+  console.log('SuperTokens initialized successfully!');
+} catch (error) {
+  console.error('SuperTokens initialization failed:', error);
+}
 
 const app = express();
 const PORT = process.env.PORT || 5001;
