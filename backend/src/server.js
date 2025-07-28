@@ -11,6 +11,12 @@ import {
 import noteRoutes from './routes/notesRoutes.js';
 import { connectDB } from '../config/db.js';
 import rateLimiter from '../middleware/rateLimiter.js';
+
+console.log('Current directory:', __dirname);
+console.log(
+  'Trying to import from:',
+  path.resolve(__dirname, '../config/supertokens.js')
+);
 import initSuperTokens from '../config/supertokens.js';
 
 dotenv.config();
