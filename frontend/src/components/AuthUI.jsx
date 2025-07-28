@@ -1,4 +1,4 @@
-import { signInAndUp } from 'supertokens-auth-react/recipe/emailpassword';
+import { emailPasswordSignInAndUp } from 'supertokens-auth-react/recipe/emailpassword';
 import { redirectToThirdPartyLogin } from 'supertokens-auth-react/recipe/thirdparty';
 import { useState } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -12,7 +12,7 @@ const AuthPage = () => {
   const handleEmailPasswordAuth = async (e) => {
     e.preventDefault();
     try {
-      const response = await signInAndUp({
+      const response = await emailPasswordSignInAndUp({
         formFields: [
           { id: 'email', value: email },
           { id: 'password', value: password },
