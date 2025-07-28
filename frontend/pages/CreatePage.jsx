@@ -61,6 +61,15 @@ const CreatePage = () => {
               <h2 className="card-title text-2xl mb-4">
                 Create New Note
               </h2>
+              <div className="card-actions justify-end">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={loading}
+                >
+                  {loading ? 'Deleting' : 'Scrap it'}
+                </button>
+              </div>
               <form onSubmit={handleSubmit}>
                 <div className="form-control mb-4">
                   <label className="label">
