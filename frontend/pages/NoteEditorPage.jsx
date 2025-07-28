@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 import {
-  ArrowLeftIcon,
-  LoaderPinwheelIcon,
-  Trash2Icon,
-} from 'lucide-react';
+  ArrowBackSharp,
+  AutorenewSharp,
+  DeleteSweep,
+} from '@mui/icons-material';
 import api from '../src/lib/axios';
 import toast from 'react-hot-toast';
 
@@ -71,7 +71,7 @@ const NoteEditorPage = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-base-200 flex items-center justify-center">
-        <LoaderPinwheelIcon className="animate-spin size-10" />
+        <AutorenewSharp className="animate-spin size-10" />
       </div>
     );
   }
@@ -101,13 +101,13 @@ const NoteEditorPage = () => {
               to="/"
               className="btn btn-ghost"
             >
-              <ArrowLeftIcon className="h-5 w-5" />
+              <ArrowBackSharp className="h-5 w-5" />
             </Link>
             <button
               onClick={handleDelete}
               className="btn btn-error btn-outline"
             >
-              <Trash2Icon className="h-5 w-5" />
+              <DeleteSweep className="h-5 w-5" />
               Delete Note
             </button>
           </div>

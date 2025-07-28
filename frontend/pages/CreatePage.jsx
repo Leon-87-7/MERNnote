@@ -1,6 +1,6 @@
 // Classes used: card bg-base-100 card-body card-title form-control label input input-bordered
 
-import { ArrowLeftIcon } from 'lucide-react';
+import { ArrowBackSharp } from '@mui/icons-material';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router';
@@ -52,7 +52,7 @@ const CreatePage = () => {
             to={'/'}
             className="btn btn-ghost mb-6"
           >
-            <ArrowLeftIcon className="size-5" />
+            <ArrowBackSharp className="size-5" />
             Back to Notes
           </Link>
 

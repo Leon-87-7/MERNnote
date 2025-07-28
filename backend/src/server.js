@@ -89,6 +89,6 @@ app.use(errorHandler());
 
 connectDB().then(() => {
   app.listen(PORT, () => {
-    console.log('server started om PORT:', PORT);
+    console.log('server started on PORT:', PORT);
   });
 });

@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
-import { PlusIcon, LogOutIcon, UserIcon } from 'lucide-react';
+import { Add, Logout, Person } from '@mui/icons-material';
+
 import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 import { signOut } from 'supertokens-auth-react/recipe/session';
 import { useNavigate } from 'react-router';
@@ -33,7 +34,7 @@ const NavBar = () => {
                   to="/create"
                   className="btn btn-primary"
                 >
-                  <PlusIcon className="size-5" />
+                  <Add className="size-5" />
                   <span>New Note</span>
                 </Link>
 
@@ -43,7 +44,7 @@ const NavBar = () => {
                     role="button"
                     className="btn btn-ghost btn-circle"
                   >
-                    <UserIcon className="size-5" />
+                    <Person className="size-5" />
                   </div>
                   <ul
                     tabIndex={0}
@@ -54,7 +55,7 @@ const NavBar = () => {
                         onClick={handleSignOut}
                         className="text-error"
                       >
-                        <LogOutIcon className="size-4" />
+                        <Logout className="size-4" />
                         Sign Out
                       </button>
                     </li>
