@@ -1,12 +1,54 @@
-import SuperTokens from 'supertokens-web-js';
-import Session from 'supertokens-web-js/recipe/session';
-import EmailPassword from 'supertokens-web-js/recipe/emailpassword';
+import SuperTokens from 'supertokens-auth-react';
+import EmailPassword from 'supertokens-auth-react/recipe/emailpassword';
+import ThirdParty from 'supertokens-auth-react/recipe/thirdparty';
+import Session from 'supertokens-auth-react/recipe/session';
 
-SuperTokens.init({
-  appInfo: {
-    apiDomain: '<YOUR_API_DOMAIN>',
-    apiBasePath: '/auth',
-    appName: '...',
-  },
-  recipeList: [Session.init(), EmailPassword.init()],
-});
+export function initSuperTokens() {
+  SuperTokens.init({
+    appInfo: {
+      appName: 'MERN Notes App',
+      apiDomain:
+        import.meta.env.VITE_API_DOMAIN || 'http://localhost:5001',
+      websiteDomain:
+        import.meta.env.VITE_WEBSITE_DOMAIN ||
+        'http://localhost:5173',
+      apiBasePath: '/auth',
+      websiteBasePath: '/auth',
+    },
+    recipeList: [
+      EmailPassword.init({
+        signInAndUpFeature: {
+          signUpForm: {
+            formFields: [
+              {
+                id: 'email',
+                label: 'Email',
+                placeholder: 'Enter your email',
+              },
+              {
+                id: 'password',
+                label: 'Password',
+                placeholder: 'Enter your password',
+              },
+            ],
+          },
+        },
+      }),
+      ThirdParty.init({
+        signInAndUpFeature: {
+          providers: [
+            {
+              id: 'google',
+              name: 'Google',
+            },
+            {
+              id: 'github',
+              name: 'GitHub',
+            },
+          ],
+        },
+      }),
+      Session.init(),
+    ],
+  });
+}

@@ -3,7 +3,7 @@ import Session from 'supertokens-node/recipe/session';
 import EmailPassword from 'supertokens-node/recipe/emailpassword';
 import ThirdParty from 'supertokens-node/recipe/thirdparty';
 
-function initSuperTokens() {
+export default function initSuperTokens() {
   (supertokens.init({
     framework: 'express',
     supertokens: {
@@ -78,3 +78,5 @@ function initSuperTokens() {
       cookieSecure: process.env.NODE_ENV === 'production',
     }));
 }
+
+// initSuperTokens();

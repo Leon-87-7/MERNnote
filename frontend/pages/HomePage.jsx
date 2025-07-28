@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { PuffLoader } from 'react-spinners';
+import { useSessionContext } from 'supertokens-auth-react/recipe/session';
+import { Link } from 'react-router';
 
 import NavBar from '../src/components/NavBar';
 import RateLimitedUI from '../src/components/RateLimitedUI';
@@ -12,8 +14,16 @@ const HomePage = () => {
   const [isRateLimited, setIsRateLimited] = useState(false);
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const session = useSessionContext();
+
   useEffect(() => {
     const fetchNotes = async () => {
+      // Only fetch notes if user is authenticated
+      if (!session.doesSessionExist) {
+        setLoading(false);
+        return;
+      }
+
       try {
         const res = await api.get('/notes');
         console.log(res.data);
@@ -22,7 +32,10 @@ const HomePage = () => {
       } catch (error) {
         console.log('Error fetching notes');
         console.log(error.response);
-        if (error.response?.status === 429) {
+        if (error.response?.status === 401) {
+          // Session expired, redirect to auth
+          window.location.href = '/auth';
+        } else if (error.response?.status === 429) {
           setIsRateLimited(true);
         } else {
           toast.error('Failed to load notes');
@@ -32,8 +45,52 @@ const HomePage = () => {
       }
     };
 
-    fetchNotes();
-  }, []);
+    if (!session.loading) {
+      fetchNotes();
+    }
+  }, [session.loading, session.doesSessionExist]);
+
+  // Show loading while session is being checked
+  if (session.loading) {
+    return (
+      <div className="min-h-screen">
+        <NavBar />
+        <div className="flex flex-col items-center text-center text-primary py-10">
+          Loading...
+          <br />
+          <br />
+          <PuffLoader
+            color="#18a048"
+            size={60}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Show welcome page for non-authenticated users
+  if (!session.doesSessionExist) {
+    return (
+      <div className="min-h-screen">
+        <NavBar />
+        <div className="max-w-4xl mx-auto p-4 mt-20 text-center">
+          <h1 className="text-5xl font-bold text-primary mb-6">
+            Welcome to MERN.note
+          </h1>
+          <p className="text-xl text-base-content/70 mb-8">
+            Your personal note-taking app. Sign in to start organizing
+            your thoughts.
+          </p>
+          <Link
+            to="/auth"
+            className="btn btn-primary btn-lg"
+          >
+            Get Started
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -53,7 +110,9 @@ const HomePage = () => {
           </div>
         )}
 
-        {notes.length === 0 && !isRateLimited && <NotesNotFound />}
+        {notes.length === 0 && !loading && !isRateLimited && (
+          <NotesNotFound />
+        )}
 
         {notes.length > 0 && !isRateLimited && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
