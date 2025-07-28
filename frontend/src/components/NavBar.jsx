@@ -8,7 +8,7 @@ const NavBar = () => {
   const session = useSessionContext();
   const navigate = useNavigate();
 
-  const handleSingOut = async () => {
+  const handleSignOut = async () => {
     await signOut();
     navigate('/');
   };
