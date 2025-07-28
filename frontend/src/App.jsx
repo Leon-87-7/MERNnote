@@ -5,6 +5,7 @@ import HomePage from '../pages/HomePage';
 import CreatePage from '../pages/CreatePage';
 import NoteEditorPage from '../pages/NoteEditorPage';
 import AuthUI from './components/AuthUI';
+import OAuthCallback from './components/OAuthCallback';
 
 const App = () => {
   return (
@@ -14,6 +15,10 @@ const App = () => {
         <Route
           path="/auth"
           element={<AuthUI />}
+        />
+        <Route
+          path="/auth/callback/:provider"
+          element={<OAuthCallback />}
         />
         <Route
           path="/"
