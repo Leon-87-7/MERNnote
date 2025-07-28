@@ -4,7 +4,7 @@ import EmailPassword from 'supertokens-node/recipe/emailpassword';
 import ThirdParty from 'supertokens-node/recipe/thirdparty';
 
 export default function initSuperTokens() {
-  (supertokens.init({
+  supertokens.init({
     framework: 'express',
     supertokens: {
       connectionURI: process.env.SUPERTOKENS_CONNECTION_URI,
@@ -71,12 +71,12 @@ export default function initSuperTokens() {
           ],
         },
       }),
+      Session.init({
+        cookieSameSite: 'lax',
+        cookieSecure: process.env.NODE_ENV === 'production',
+      }),
     ],
-  }),
-    Session.init({
-      cookieSameSite: 'lax',
-      cookieSecure: process.env.NODE_ENV === 'production',
-    }));
+  });
 }
 
 // initSuperTokens();

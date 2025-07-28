@@ -12,14 +12,17 @@ import noteRoutes from './routes/notesRoutes.js';
 import { connectDB } from '../config/db.js';
 import rateLimiter from '../middleware/rateLimiter.js';
 
+import initSuperTokens from '../config/supertokens.js';
+
+dotenv.config();
+
+const __dirname = path.resolve();
+
 console.log('Current directory:', __dirname);
 console.log(
   'Trying to import from:',
   path.resolve(__dirname, '../config/supertokens.js')
 );
-import initSuperTokens from '../config/supertokens.js';
-
-dotenv.config();
 
 console.log('About to initialize SuperTokens...');
 try {
@@ -31,7 +34,6 @@ try {
 
 const app = express();
 const PORT = process.env.PORT || 5001;
-const __dirname = path.resolve();
 
 //middleware
 if (process.env.NODE_ENV !== 'production') {
