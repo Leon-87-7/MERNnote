@@ -52,7 +52,10 @@ export function initSuperTokens() {
           ],
         },
       }),
-      Session.init(),
+      Session.init({
+        cookieSameSite: 'lax',
+        cookieSecure: process.env.NODE_ENV === 'production',
+      }),
     ],
   });
 }
