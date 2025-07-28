@@ -4,7 +4,7 @@ export async function getAllNotes(req, res) {
   try {
     const userId = req.session.getUserId();
 
-    const notes = await Note.find().sort({ createdAt: -1 }); //newest first
+    const notes = await Note.find({ userId }).sort({ createdAt: -1 }); //newest first
     res.status(200).json(notes);
   } catch (error) {
     console.error('Error in getAllNotes controller', error);
@@ -17,7 +17,7 @@ export async function getNoteById(req, res) {
   try {
     const userId = req.session.getUserId();
 
-    const note = await Note.findById(req.params.id);
+    const note = await Note.findOne({ _id: req.params.id, userId });
     if (!note)
       return res.status(404).json({ message: 'Note not found!' });
     res.status(200).json(note);
@@ -34,7 +34,7 @@ export async function createNote(req, res) {
     const userId = req.session.getUserId();
 
     const { title, content } = req.body;
-    const note = new Note({ title, content });
+    const note = new Note({ title, content, userId });
 
     const savedNote = await note.save();
     res.status(201).json(savedNote);
@@ -49,8 +49,8 @@ export async function updateNote(req, res) {
     const userId = req.session.getUserId();
 
     const { title, content } = req.body;
-    const updatedNote = await Note.findByIdAndUpdate(
-      req.params.id,
+    const updatedNote = await Note.findOneAndUpdate(
+      { _id: req.params.id, userId },
       { title, content },
       { new: true }
     );
@@ -69,7 +69,7 @@ export async function deleteNote(req, res) {
   try {
     const userId = req.session.getUserId();
 
-    const deletedNote = await Note.findByIdAndDelete(req.params.id);
+    const deletedNote = await Note.findOneAndDelete({ _id: req.params.id, userId });
     if (!deletedNote)
       return res.status(404).json({ message: 'Note not found!' });
     res.status(200).json({
