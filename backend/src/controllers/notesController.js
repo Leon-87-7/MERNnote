@@ -69,7 +69,10 @@ export async function deleteNote(req, res) {
   try {
     const userId = req.session.getUserId();
 
-    const deletedNote = await Note.findOneAndDelete({ _id: req.params.id, userId });
+    const deletedNote = await Note.findOneAndDelete({
+      _id: req.params.id,
+      userId,
+    });
     if (!deletedNote)
       return res.status(404).json({ message: 'Note not found!' });
     res.status(200).json({
