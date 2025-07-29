@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "npm run start --prefix backend"
+    "start": "npm run start --prefix backend",
+    "dev": "npm run dev --prefix backend run dev --prefix frontend",
+    "install-all": "npm install --prefix backend && npm install --prefix frontend"
   },
   "repository": {
     "type": "git",
@@ -17,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Leon-87-7/MERNnote/issues"
   },
-  "homepage": "https://github.com/Leon-87-7/MERNnote#readme"
+  "homepage": "https://github.com/Leon-87-7/MERNnote#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }

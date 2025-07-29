@@ -109,12 +109,12 @@ git clone https://github.com/Leon-87-7/MERNnote.git
 cd MERNnote
 
 # Install backend dependencies
-cd server
+cd backend
 npm install
 
-# Create environment variables
+# Create environment variables from template
 cp .env.example .env
-# Edit .env with your MongoDB 
+# Edit .env with your actual values (see Environment Variables section below)
 
 # Start the server
 npm run dev
@@ -131,11 +131,39 @@ npm start
 ```
 
 ### **Environment Variables**
+Create a `.env` file in the `backend` directory with the following variables:
+
 ```env
-MONGODB_URI=your_mongodb_connection_string
-PORT=5000
+# Database
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/database_name
+
+# Server
+PORT=5001
+
+# Redis (for caching)
+UPSTASH_REDIS_REST_URL=https://your-redis-url.upstash.io
+UPSTASH_REDIS_REST_TOKEN=your_redis_token
+
+# Google OAuth
+GOOGLE_API_KEY=your_google_api_key
+GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
+# GitHub OAuth
+GITHUB_CLIENT_ID=your_github_client_id
+GITHUB_CLIENT_SECRET=your_github_client_secret
+
+# SuperTokens Authentication
+SUPERTOKENS_CONNECTION_URI=https://your-supertokens-instance.aws.supertokens.io
+SUPERTOKENS_API_KEY=your_supertokens_api_key
+
+# Domains
+API_DOMAIN=http://localhost:5001
+WEBSITE_DOMAIN=http://localhost:3000
 NODE_ENV=development
 ```
+
+**Note**: Replace all placeholder values with your actual credentials. Never commit the `.env` file to version control.
 
 ## 🧪 Testing & Development
 
