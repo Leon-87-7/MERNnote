@@ -93,6 +93,12 @@ MERNnote represents my transition from frontend-only applications to full-stack 
 - **Middleware**: Authentication, logging, and CORS handling
 - **Route Organization**: Modular route structure for maintainability
 
+### **Security Best Practices**
+- **Environment Variables**: Learned proper `.env` file management and gitignore configuration
+- **Credential Rotation**: Experienced handling of accidentally exposed secrets and immediate remediation
+- **Security Incident Response**: Practiced identifying, assessing, and resolving security vulnerabilities
+- **Access Control**: Implemented user isolation and session-based authentication
+
 ## 🎯 Features Implemented
 
 ### **Core Functionality**
@@ -223,6 +229,7 @@ NODE_ENV=development
 - 🆕 **Rate limiting and API protection**
 - 🆕 **Full-stack application architecture**
 - 🆕 **Production-ready error handling**
+- 🆕 **Security incident response and credential management**
 
 ## 📚 Resources & Learning Materials
 
