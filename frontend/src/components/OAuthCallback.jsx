@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router';
-import { thirdPartySignInAndUp } from 'supertokens-auth-react/recipe/thirdparty';
+import ThirdParty from 'supertokens-auth-react/recipe/thirdparty';
 
 const OAuthCallback = () => {
   const navigate = useNavigate();
@@ -11,10 +11,15 @@ const OAuthCallback = () => {
     console.log('Processing OAuth callback for:', provider);
     console.log('URL params:', location.search);
 
-    thirdPartySignInAndUp()
+    ThirdParty.thirdPartySignInAndUp()
       .then((response) => {
         if (response.status === 'OK') {
           console.log('OAuth login successful');
+          if (response.createdNewUser) {
+            console.log('New user created');
+          } else {
+            console.log('Existing user logged in');
+          }
           navigate('/');
         } else {
           console.error('OAuth login failed:', response);
