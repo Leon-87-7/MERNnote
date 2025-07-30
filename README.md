@@ -1,10 +1,9 @@
 # MERNnote - Full-Stack Notes Application
-[check the app now!](https://mernnote-yn2t.onrender.com/)
-
+[Check the live app!](https://mernnote-yn2t.onrender.com/)
 
 ## 🎯 Project Overview
 
-MERNnote is a comprehensive full-stack notes application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). This project represents a significant milestone in my journey from frontend-focused React development to full-stack web development, showcasing my evolution as a developer and the integration of multiple cutting-edge technologies.
+MERNnote is a comprehensive full-stack notes application built with the MERN stack (MongoDB, Express.js, React.js, Node.js). This project features modern authentication via SuperTokens, rate limiting with Upstash Redis, and supports both email/password and OAuth (Google, GitHub) authentication. It represents a significant milestone in my journey from frontend-focused React development to full-stack web development.
 
 ## 📚 My Programming Learning Journey
 
@@ -29,11 +28,13 @@ MERNnote represents my transition from frontend-only applications to full-stack 
 - **Express.js**: Learned to create RESTful APIs, middleware implementation, and route handling
 - **MongoDB**: Transitioned from local storage to NoSQL database management
 - **Mongoose**: Mastered ODM (Object Document Mapping) for MongoDB
+- **SuperTokens**: Advanced authentication system with OAuth integration
 
 #### **Full-Stack Integration**
 - **CORS Configuration**: Understanding cross-origin resource sharing
 - **API Design**: RESTful API principles and HTTP methods (GET, POST, PUT, DELETE)
-- **Authentication**: JWT token implementation for secure user sessions
+- **Authentication**: SuperTokens for secure user sessions with email/password and OAuth
+- **Rate Limiting**: Upstash Redis for API protection and performance
 - **Environment Variables**: Secure configuration management with dotenv
 
 #### **Development Tools & Best Practices**
@@ -44,32 +45,38 @@ MERNnote represents my transition from frontend-only applications to full-stack 
 
 ### **Enhanced Frontend Skills:**
 - **Advanced React Patterns**: Better state management and component architecture
-- **Axios**: HTTP client for API communication (upgrade from fetch)
+- **Axios**: HTTP client for API communication with session handling
 - **React Router**: Client-side routing for SPA navigation
-- **Form Handling**: Complex form validation and submission
-- **Error Boundaries**: Better error handling and user feedback
+- **Vite**: Modern build tool for faster development and optimized builds
+- **Tailwind CSS + DaisyUI**: Utility-first CSS framework with component library
+- **SuperTokens React**: Authentication UI components and session management
 
 ## 🚀 Technical Architecture
 
 ### **Backend Structure**
 ```
-/server
-├── models/          # Mongoose schemas
-├── routes/          # Express route handlers
-├── middleware/      # Custom middleware functions
-├── config/          # Database configuration
-└── server.js        # Main server file
+/backend
+├── src/
+│   ├── controllers/     # CRUD operations for notes
+│   ├── routes/          # Express route handlers
+│   └── server.js        # Main server file with SuperTokens
+├── models/              # Mongoose schemas
+├── middleware/          # Authentication and rate limiting
+├── config/              # Database, SuperTokens, and Redis setup
+└── package.json         # Backend dependencies
 ```
 
 ### **Frontend Structure**
 ```
-/client
+/frontend
 ├── src/
-│   ├── components/  # Reusable React components
-│   ├── pages/       # Route-specific components
-│   ├── services/    # API service functions
-│   ├── hooks/       # Custom React hooks
-│   └── App.js       # Main application component
+│   ├── components/      # Reusable React components
+│   ├── pages/           # Route-specific components
+│   ├── lib/             # Axios and SuperTokens configuration
+│   └── App.jsx          # Main application with routing
+├── public/              # Static assets
+├── vite.config.js       # Vite configuration
+└── package.json         # Frontend dependencies
 ```
 
 ## 💡 Key Learning Milestones
@@ -89,10 +96,12 @@ MERNnote represents my transition from frontend-only applications to full-stack 
 ## 🎯 Features Implemented
 
 ### **Core Functionality**
-- ✅ **CRUD Operations**: Create, read, update, delete notes
-- ✅ **Responsive Design**: Mobile-first responsive layout
+- ✅ **CRUD Operations**: Create, read, update, delete notes with user isolation
+- ✅ **Authentication**: Email/password and OAuth (Google, GitHub) via SuperTokens
+- ✅ **Rate Limiting**: Upstash Redis protection against API abuse
+- ✅ **Responsive Design**: Mobile-first layout with Tailwind CSS
+- ✅ **Session Management**: HTTP-only cookies with automatic session handling
 - ✅ **Real-time Updates**: Immediate UI updates after operations
-- ✅ **Data Validation**: Frontend and backend validation
 - ✅ **Error Handling**: Comprehensive error messages and loading states
 
 ## 🔧 Installation & Setup
@@ -102,32 +111,32 @@ MERNnote represents my transition from frontend-only applications to full-stack 
 - MongoDB Atlas account or local MongoDB installation
 - Git
 
-### **Backend Setup**
+### **Quick Start**
 ```bash
 # Clone the repository
 git clone https://github.com/Leon-87-7/MERNnote.git
 cd MERNnote
 
-# Install backend dependencies
-cd backend
-npm install
+# Install all dependencies (both frontend and backend)
+npm run install-all
 
-# Create environment variables from template
-cp .env.example .env
-# Edit .env with your actual values (see Environment Variables section below)
+# Set up environment variables (see Environment Variables section below)
+# Create .env file in /backend directory
 
-# Start the server
+# Start development mode (runs both frontend and backend)
 npm run dev
 ```
 
-### **Frontend Setup**
+### **Individual Setup**
 ```bash
-# Install frontend dependencies
-cd ../client
-npm install
+# Backend only (from /backend directory)
+npm run dev
 
-# Start the development server
-npm start
+# Frontend only (from /frontend directory) 
+npm run dev
+
+# Build for production
+npm run build
 ```
 
 ### **Environment Variables**
@@ -159,7 +168,7 @@ SUPERTOKENS_API_KEY=your_supertokens_api_key
 
 # Domains
 API_DOMAIN=http://localhost:5001
-WEBSITE_DOMAIN=http://localhost:3000
+WEBSITE_DOMAIN=http://localhost:5173
 NODE_ENV=development
 ```
 
@@ -210,8 +219,9 @@ NODE_ENV=development
 - 🆕 **Server-side JavaScript with Node.js**
 - 🆕 **RESTful API design and implementation**
 - 🆕 **NoSQL database design with MongoDB**
+- 🆕 **Modern authentication with SuperTokens**
+- 🆕 **Rate limiting and API protection**
 - 🆕 **Full-stack application architecture**
-- 🆕 **API documentation and testing**
 - 🆕 **Production-ready error handling**
 
 ## 📚 Resources & Learning Materials
@@ -267,6 +277,6 @@ The journey from building simple React components to creating a full-stack appli
 **Total Development Time**: ~8 hours across 3 days
 **Lines of Code**: ~2,500 (Frontend: ~1,500, Backend: ~1,000)
 **Commits**: 45+ commits showing iterative development process
-**Technologies Mastered**: 8 new technologies and frameworks
+**Technologies Mastered**: 10+ new technologies and frameworks including SuperTokens, Upstash Redis, Vite, and Tailwind CSS
 
 This README itself represents my journey—from someone who knew React basics to a developer capable of building full-stack applications. The next phase involves mastering these technologies through repetition and real-world projects until full-stack development becomes my natural workflow, while expanding into Next.js for enhanced React capabilities and deepening my MERN stack expertise.
