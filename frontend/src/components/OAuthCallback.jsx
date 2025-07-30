@@ -11,16 +11,22 @@ const OAuthCallback = () => {
     console.log('Processing OAuth callback for:', provider);
     console.log('URL params:', location.search);
 
-    ThirdParty.thirdPartySignInAndUp()
+    ThirdParty.signInAndUp()
       .then((response) => {
         if (response.status === 'OK') {
           console.log('OAuth login successful');
-          if (response.createdNewUser) {
+          if (response.createdNewRecipeUser) {
             console.log('New user created');
           } else {
             console.log('Existing user logged in');
           }
           navigate('/');
+        } else if (response.status === 'NO_EMAIL_GIVEN_BY_PROVIDER') {
+          console.error('OAuth provider did not provide email');
+          navigate('/auth');
+        } else if (response.status === 'SIGN_IN_UP_NOT_ALLOWED') {
+          console.error('Sign in/up not allowed:', response.reason);
+          navigate('/auth');
         } else {
           console.error('OAuth login failed:', response);
           navigate('/auth');
